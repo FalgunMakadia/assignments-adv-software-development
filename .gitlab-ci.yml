@@ -1,0 +1,23 @@
+variables:
+  MAVEN_CLI_OPTS: 'clean'
+
+build:
+  stage: build
+  script:
+    - cd ./A1
+    - mvn $MAVEN_CLI_OPTS compile
+  tags:
+    - ugrad
+
+test:
+  stage: test
+  script:
+    - cd ./A1
+    - mvn verify
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - ./A1/target/surefire-reports/TEST-*.xml
+  tags:
+    - ugrad
